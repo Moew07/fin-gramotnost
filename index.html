@@ -1,0 +1,1868 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>🌸 Финансовая Грамотность</title>
+<link rel="icon" href="cat.png" type="image/png">
+<meta name="theme-color" content="#84A282">
+<style>
+:root {
+  --pink: #F6E2E9;
+  --cream: #FEFAF3;
+  --green-light: #B8CFB3;
+  --green: #84A282;
+  --green-dark: #5d7a5b;
+  --text: #3d3d3d;
+  --text-light: #6b6b6b;
+  --shadow: rgba(132,162,130,0.2);
+}
+
+[data-theme="dark"] {
+  --pink: #3a4a4f;
+  --cream: #1a2328;
+  --green-light: #6a9a65;
+  --green: #84A282;
+  --green-dark: #a8c4a6;
+  --text: #f0f4f5;
+  --text-light: #c5d1d6;
+  --shadow: rgba(0,0,0,0.5);
+}
+
+[data-theme="blue"] {
+  --pink: #dfe6e9;
+  --cream: #f0f3f5;
+  --green-light: #74b9ff;
+  --green: #0984e3;
+  --green-dark: #06528f;
+  --text: #2d3436;
+  --text-light: #636e72;
+  --shadow: rgba(9,132,227,0.2);
+}
+
+[data-theme="purple"] {
+  --pink: #f3e5f5;
+  --cream: #faf3ff;
+  --green-light: #c9a8ff;
+  --green: #9b59b6;
+  --green-dark: #6c3483;
+  --text: #2d3436;
+  --text-light: #636e72;
+  --shadow: rgba(155,89,182,0.2);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; transition: background-color 0.3s, color 0.2s; }
+
+body {
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  background: linear-gradient(135deg, var(--cream) 0%, var(--pink) 100%);
+  min-height: 100vh;
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+.bg-bubbles {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none; z-index: 0; overflow: hidden;
+}
+
+.bubble {
+  position: absolute; border-radius: 50%;
+  background: rgba(184,207,179,0.15);
+  animation: float 20s infinite ease-in-out;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) translateX(0) scale(1); }
+  33% { transform: translateY(-100px) translateX(50px) scale(1.1); }
+  66% { transform: translateY(-50px) translateX(-30px) scale(0.9); }
+}
+
+.navbar {
+  background: rgba(254,250,243,0.95);
+  backdrop-filter: blur(15px);
+  padding: 12px 15px;
+  display: flex; justify-content: space-between; align-items: center;
+  position: sticky; top: 0; z-index: 100;
+  border-bottom: 2px solid var(--pink);
+  box-shadow: 0 2px 20px var(--shadow);
+}
+
+.navbar .logo {
+  font-size: 1.3em; font-weight: bold; color: var(--green-dark);
+  display: flex; align-items: center; gap: 8px;
+}
+
+.nav-links { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+
+.nav-links button, .theme-btn {
+  background: var(--pink); border: 2px solid transparent;
+  color: var(--text); padding: 8px 14px; border-radius: 20px;
+  cursor: pointer; font-size: 0.85em; font-weight: 600;
+  transition: all 0.3s;
+}
+
+.nav-links button:hover, .theme-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px var(--shadow); }
+.nav-links button.active { background: var(--green); color: white; border-color: var(--green-dark); }
+
+.lang-select {
+  padding: 6px 12px; border-radius: 15px; border: 2px solid var(--green-light);
+  background: var(--cream); color: var(--text); font-size: 0.85em; cursor: pointer;
+}
+
+.page { display: none; padding: 20px 15px; max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+.page.active { display: block; animation: fadeInUp 0.6s ease; }
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== ПРОФИЛЬ ===== */
+.profile-container {
+  max-width: 800px; margin: 20px auto;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+}
+
+.profile-card {
+  background: rgba(254,250,243,0.95); border-radius: 20px; padding: 30px 25px;
+  text-align: center; border: 2px solid var(--pink);
+  box-shadow: 0 10px 40px var(--shadow);
+}
+
+.profile-avatar-container {
+  position: relative; width: 130px; height: 130px;
+  margin: 0 auto 20px; cursor: pointer; transition: transform 0.3s;
+}
+
+.profile-avatar-container:hover { transform: scale(1.05); }
+
+.profile-avatar {
+  width: 100%; height: 100%; border-radius: 50%;
+  background: linear-gradient(135deg, var(--green-light), var(--green));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 3.5em; overflow: hidden; border: 4px solid white;
+  box-shadow: 0 5px 20px var(--shadow);
+}
+
+.profile-avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+.avatar-upload-hint {
+  position: absolute; bottom: 5px; right: 5px;
+  background: var(--green); color: white;
+  width: 35px; height: 35px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2em; border: 3px solid white;
+}
+
+.profile-card h2 { color: var(--green-dark); margin-bottom: 10px; font-size: 1.6em; }
+
+.profile-card input {
+  width: 100%; padding: 12px 16px; border-radius: 12px;
+  border: 2px solid var(--pink); background: white;
+  color: var(--text); font-size: 1em; margin: 10px 0;
+  text-align: center;
+}
+
+.settings-card {
+  background: rgba(254,250,243,0.95); border-radius: 20px; padding: 25px;
+  border: 2px solid var(--pink); box-shadow: 0 10px 40px var(--shadow);
+}
+
+.settings-card h3 {
+  color: var(--green-dark); margin-bottom: 20px; font-size: 1.3em;
+  display: flex; align-items: center; gap: 8px;
+}
+
+.setting-item {
+  margin-bottom: 20px; padding-bottom: 15px;
+  border-bottom: 1px solid var(--pink);
+}
+
+.setting-item:last-child { border-bottom: none; }
+
+.setting-label {
+  display: block; margin-bottom: 8px; font-weight: 600; color: var(--text);
+}
+
+.theme-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+}
+
+.theme-option {
+  padding: 15px; border-radius: 12px; border: 3px solid transparent;
+  cursor: pointer; text-align: center; font-size: 0.85em; font-weight: 600;
+  transition: all 0.3s;
+}
+
+.theme-option:hover { transform: translateY(-3px); }
+.theme-option.active { border-color: var(--green-dark); box-shadow: 0 0 0 3px var(--green-light); }
+
+.theme-pink { background: linear-gradient(135deg, #F6E2E9, #FEFAF3); color: #3d3d3d; }
+.theme-dark { background: linear-gradient(135deg, #2d3436, #1e272e); color: #f5f6fa; }
+.theme-blue { background: linear-gradient(135deg, #dfe6e9, #74b9ff); color: #2d3436; }
+.theme-purple { background: linear-gradient(135deg, #f3e5f5, #c9a8ff); color: #2d3436; }
+
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 20px; }
+
+.stat-box {
+  background: linear-gradient(135deg, var(--pink), white);
+  padding: 15px; border-radius: 14px; border: 2px solid var(--green-light);
+}
+
+.stat-box .number { font-size: 1.8em; font-weight: bold; color: var(--green-dark); }
+.stat-box .label { font-size: 0.8em; color: var(--text-light); margin-top: 4px; }
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--green), var(--green-dark));
+  color: white; border: none; padding: 12px 28px; border-radius: 25px;
+  font-size: 1em; font-weight: bold; cursor: pointer;
+  transition: all 0.3s; margin-top: 12px; box-shadow: 0 4px 15px var(--shadow);
+}
+
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px var(--shadow); }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+/* ===== ОБУЧЕНИЕ ===== */
+.learn-header { text-align: center; margin-bottom: 20px; }
+.learn-header h2 { font-size: 1.8em; color: var(--green-dark); margin-bottom: 8px; }
+
+.progress-container { max-width: 500px; margin: 0 auto 20px; }
+.progress-bar { width: 100%; height: 12px; background: var(--pink); border-radius: 6px; overflow: hidden; }
+.progress-bar .fill { height: 100%; background: linear-gradient(90deg, var(--green-light), var(--green)); border-radius: 6px; transition: width 0.8s; }
+.progress-text { text-align: center; margin-top: 6px; color: var(--text-light); font-size: 0.9em; }
+
+.sections-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-top: 20px; }
+
+.section-card {
+  background: rgba(254,250,243,0.95); border-radius: 16px; padding: 25px;
+  border: 2px solid var(--pink); cursor: pointer; transition: all 0.3s; position: relative;
+}
+
+.section-card:hover:not(.locked) { transform: translateY(-5px); border-color: var(--green); box-shadow: 0 10px 30px var(--shadow); }
+.section-card.locked { opacity: 0.5; cursor: not-allowed; }
+.section-card.completed { border-color: var(--green); background: linear-gradient(135deg, rgba(132,162,130,0.1), white); }
+
+.section-card .icon { font-size: 3em; margin-bottom: 12px; display: block; }
+.section-card h3 { font-size: 1.2em; color: var(--green-dark); margin-bottom: 8px; }
+.section-card p { color: var(--text-light); font-size: 0.9em; line-height: 1.5; }
+
+.section-card .badge {
+  position: absolute; top: 12px; right: 12px;
+  background: var(--green); color: white; padding: 4px 12px;
+  border-radius: 15px; font-size: 0.8em; font-weight: bold;
+}
+
+.section-card .lock-icon { position: absolute; top: 12px; right: 12px; font-size: 1.5em; }
+
+/* ===== ЛОББИ ===== */
+.lobby-container {
+  max-width: 700px; margin: 20px auto;
+  background: rgba(254,250,243,0.95); border-radius: 20px;
+  padding: 30px 25px; border: 2px solid var(--pink);
+  box-shadow: 0 10px 40px var(--shadow);
+}
+
+.lobby-header { text-align: center; margin-bottom: 20px; }
+.lobby-header h2 { font-size: 1.8em; color: var(--green-dark); margin-bottom: 8px; }
+.lobby-header p { color: var(--text-light); }
+
+.player-slots { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; margin: 20px 0; }
+
+.player-slot {
+  background: white; border: 2px solid var(--pink);
+  border-radius: 14px; padding: 16px;
+  display: flex; align-items: center; gap: 12px;
+}
+
+.player-slot.filled { border-color: var(--green); background: linear-gradient(135deg, rgba(132,162,130,0.1), white); }
+.player-slot.empty { border-style: dashed; background: rgba(184,207,179,0.1); justify-content: center; cursor: pointer; }
+
+.slot-avatar {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--green-light);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5em; font-weight: bold; color: white; flex-shrink: 0;
+}
+
+.slot-info { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+
+.slot-name-input {
+  width: 100%; padding: 6px 10px; border-radius: 8px;
+  border: 2px solid var(--pink); background: var(--cream);
+  color: var(--text); font-size: 0.95em; font-weight: bold;
+}
+
+.slot-type-select {
+  width: 100%; padding: 6px 10px; border-radius: 8px;
+  border: 2px solid var(--pink); background: var(--cream);
+  color: var(--text); font-size: 0.85em; cursor: pointer;
+}
+
+.lobby-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 25px; }
+
+.btn-secondary {
+  background: var(--pink); color: var(--text);
+  border: 2px solid var(--green-light); padding: 12px 24px;
+  border-radius: 22px; cursor: pointer; font-size: 0.95em; font-weight: 600;
+  transition: all 0.3s;
+}
+
+.btn-secondary:hover { background: var(--green-light); transform: translateY(-2px); }
+
+.rules-section {
+  margin-top: 30px; padding: 22px;
+  background: rgba(254,250,243,0.95); border-radius: 16px;
+  border: 2px solid var(--pink);
+}
+
+.rules-section h3 { color: var(--green-dark); margin-bottom: 15px; font-size: 1.2em; }
+
+.rules-section p { color: var(--text); line-height: 1.7; font-size: 0.95em; margin-bottom: 10px; }
+.rules-section ul { margin-left: 20px; margin-bottom: 10px; color: var(--text); }
+.rules-section li { margin: 6px 0; line-height: 1.6; }
+
+/* ===== ИГРА ===== */
+.game-board-container { display: none; max-width: 100%; margin: 15px auto; }
+.game-board-container.active { display: block; }
+
+.game-info-bar {
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 10px; margin-bottom: 15px; padding: 14px 18px;
+  background: rgba(254,250,243,0.95); border-radius: 14px;
+  border: 2px solid var(--pink);
+}
+
+.game-board-wrapper {
+  background: rgba(254,250,243,0.95); border-radius: 20px; padding: 20px;
+  border: 2px solid var(--pink); margin: 15px 0;
+}
+
+.game-board { 
+  display: grid; 
+  grid-template-columns: repeat(10, 1fr); 
+  gap: 5px; 
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.cell {
+  aspect-ratio: 1; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  border-radius: 10px; 
+  font-size: 0.75em; 
+  font-weight: bold;
+  position: relative; 
+  background: white; 
+  border: 2px solid var(--pink);
+  min-height: 60px;
+  transition: transform 0.2s;
+}
+
+.cell:hover { transform: scale(1.05); z-index: 2; }
+
+.cell.start { background: linear-gradient(135deg, var(--green-light), var(--green)); border-color: var(--green); color: white; }
+.cell.finish { background: linear-gradient(135deg, #ffd54f, #ffb300); border-color: #ffb300; color: white; animation: glow 2s infinite; }
+.cell.bonus { background: linear-gradient(135deg, #b3e5fc, #81d4fa); border-color: #4fc3f7; }
+.cell.penalty { background: linear-gradient(135deg, #ffcdd2, #ef9a9a); border-color: #e57373; }
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 10px rgba(255,179,0,0.5); }
+  50% { box-shadow: 0 0 25px rgba(255,179,0,0.8); }
+}
+
+.cell .cell-number { position: absolute; top: 2px; left: 4px; font-size: 0.65em; opacity: 0.7; }
+.cell .cell-icon { font-size: 1.2em; }
+
+.cell .player-token {
+  width: 36px; 
+  height: 36px; 
+  border-radius: 50%;
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  font-size: 0.7em; 
+  font-weight: bold; 
+  position: absolute;
+  border: 3px solid white; 
+  z-index: 5; 
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cell .player-token img { width: 100%; height: 100%; object-fit: cover; }
+
+.dice-area { text-align: center; margin: 25px 0; }
+
+.dice {
+  width: 90px; 
+  height: 90px;
+  background: linear-gradient(135deg, white, var(--pink));
+  border-radius: 16px; 
+  display: inline-flex;
+  align-items: center; 
+  justify-content: center;
+  font-size: 2.8em; 
+  color: var(--green-dark); 
+  font-weight: bold;
+  cursor: pointer; 
+  box-shadow: 0 8px 25px var(--shadow); 
+  border: 3px solid var(--green-light);
+  user-select: none;
+  transition: transform 0.3s;
+}
+
+.dice:hover:not(.disabled) { 
+  transform: scale(1.1); 
+  box-shadow: 0 12px 35px var(--shadow);
+}
+
+.dice.disabled { 
+  opacity: 0.5; 
+  cursor: not-allowed; 
+  pointer-events: none;
+}
+
+.dice.rolling { 
+  animation: diceRoll 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes diceRoll {
+  0% { transform: rotate(0deg) scale(1); }
+  20% { transform: rotate(72deg) scale(1.1); }
+  40% { transform: rotate(144deg) scale(1); }
+  60% { transform: rotate(216deg) scale(1.1); }
+  80% { transform: rotate(288deg) scale(1); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+.dice-label { 
+  margin-top: 12px; 
+  color: var(--text-light); 
+  font-size: 1em; 
+  font-weight: 600;
+}
+
+.players-panel { 
+  display: grid; 
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+  gap: 12px; 
+  margin-top: 15px; 
+}
+
+.player-card-game { 
+  background: white; 
+  padding: 14px; 
+  border-radius: 12px; 
+  border: 2px solid var(--pink);
+  transition: all 0.3s;
+}
+
+.player-card-game.active-turn { 
+  border-color: var(--green); 
+  box-shadow: 0 0 15px var(--shadow);
+  transform: translateY(-2px);
+}
+
+.player-card-game .p-name { 
+  font-weight: bold; 
+  font-size: 1em; 
+  display: flex; 
+  align-items: center; 
+  gap: 8px; 
+}
+
+.player-card-game .p-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--green);
+  flex-shrink: 0;
+}
+
+.player-card-game .p-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.player-card-game .p-position { 
+  color: var(--text-light); 
+  font-size: 0.9em; 
+  margin-top: 4px; 
+}
+
+.game-message {
+  text-align: center; 
+  padding: 14px; 
+  margin: 12px 0;
+  border-radius: 12px; 
+  font-weight: 600; 
+  display: none;
+  animation: slideIn 0.4s;
+}
+
+@keyframes slideIn {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.game-message.show { display: block; }
+.game-message.success { background: var(--green-light); color: var(--green-dark); }
+.game-message.error { background: #ffcdd2; color: #c62828; }
+
+.hidden-file-input { display: none; }
+
+/* МОДАЛКИ */
+.modal-overlay {
+  display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(61,61,61,0.7); backdrop-filter: blur(8px);
+  z-index: 200; justify-content: center; align-items: center; padding: 20px;
+}
+.modal-overlay.active { display: flex; }
+.modal-content {
+  background: var(--cream); border-radius: 20px; padding: 30px 25px;
+  max-width: 700px; width: 100%; max-height: 90vh; overflow-y: auto;
+  border: 2px solid var(--pink); position: relative;
+}
+.modal-content h2 { color: var(--green-dark); margin-bottom: 20px; font-size: 1.5em; }
+.modal-content .info-block {
+  background: white; padding: 18px; border-radius: 12px;
+  margin: 15px 0; border-left: 4px solid var(--green);
+}
+.modal-content .info-block h4 { color: var(--green-dark); margin-bottom: 10px; }
+.modal-content .info-block ul { padding-left: 20px; margin-top: 8px; }
+.modal-content .info-block li { margin: 6px 0; line-height: 1.6; }
+
+/* ===== ТЁМНАЯ ТЕМА ===== */
+[data-theme="dark"] .profile-card,
+[data-theme="dark"] .settings-card,
+[data-theme="dark"] .lobby-container,
+[data-theme="dark"] .game-board-wrapper,
+[data-theme="dark"] .game-info-bar,
+[data-theme="dark"] .player-card-game,
+[data-theme="dark"] .player-slot,
+[data-theme="dark"] .section-card,
+[data-theme="dark"] .modal-content,
+[data-theme="dark"] .stat-box,
+[data-theme="dark"] .cell,
+[data-theme="dark"] .dice,
+[data-theme="dark"] .rules-section {
+  background: #2d3a3f !important;
+  color: #f0f4f5 !important;
+}
+
+[data-theme="dark"] .info-block {
+  background: #3a4a4f !important;
+  color: #f0f4f5 !important;
+}
+
+[data-theme="dark"] input,
+[data-theme="dark"] select,
+[data-theme="dark"] .profile-card input,
+[data-theme="dark"] .slot-name-input,
+[data-theme="dark"] .slot-type-select {
+  background: #1a2328 !important;
+  color: #f0f4f5 !important;
+  border-color: #4a6a6f !important;
+}
+
+[data-theme="dark"] .navbar {
+  background: rgba(26,35,40,0.95) !important;
+}
+
+[data-theme="dark"] .btn-secondary {
+  background: #3a4a4f !important;
+  color: #f0f4f5 !important;
+}
+
+[data-theme="dark"] .cell.start {
+  background: linear-gradient(135deg, #6a9a65, #84A282) !important;
+}
+
+[data-theme="dark"] .cell.finish {
+  background: linear-gradient(135deg, #ffd54f, #ffb300) !important;
+  color: #1a2328 !important;
+}
+
+[data-theme="dark"] .cell.bonus {
+  background: linear-gradient(135deg, #4a7a8f, #5a9ab0) !important;
+  color: white !important;
+}
+
+[data-theme="dark"] .cell.penalty {
+  background: linear-gradient(135deg, #8f4a4a, #b05a5a) !important;
+  color: white !important;
+}
+
+[data-theme="dark"] .cell .cell-number {
+  color: #c5d1d6 !important;
+}
+
+[data-theme="dark"] .theme-dark { 
+  background: linear-gradient(135deg, #1a2328, #2d3a3f); 
+  color: #f0f4f5;
+  border: 2px solid #84A282;
+}
+[data-theme="dark"] .theme-blue { 
+  background: linear-gradient(135deg, #2a4a6f, #3a6a9f); 
+  color: #f0f4f5; 
+}
+[data-theme="dark"] .theme-purple { 
+  background: linear-gradient(135deg, #4a2a6f, #6a3a9f); 
+  color: #f0f4f5; 
+}
+
+/* ===== АДАПТАЦИЯ ===== */
+@media (max-width: 1024px) {
+  .game-board { grid-template-columns: repeat(7, 1fr); }
+  .cell { min-height: 55px; }
+}
+
+@media (max-width: 768px) {
+  .profile-container { grid-template-columns: 1fr; }
+  .navbar { flex-direction: column; gap: 8px; }
+  .nav-links { width: 100%; justify-content: center; flex-wrap: wrap; }
+  .theme-grid { grid-template-columns: repeat(2, 1fr); }
+  .stats { grid-template-columns: 1fr; }
+  
+  .game-board { 
+    grid-template-columns: repeat(5, 1fr); 
+    gap: 4px;
+  }
+  .cell { 
+    min-height: 50px; 
+    font-size: 0.65em;
+  }
+  .cell .cell-icon { font-size: 1em; }
+  
+  .cell .player-token {
+    width: 28px;
+    height: 28px;
+    font-size: 0.6em;
+  }
+  
+  .dice {
+    width: 75px;
+    height: 75px;
+    font-size: 2.4em;
+  }
+  
+  .player-card-game .p-avatar {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-avatar-container { width: 100px; height: 100px; }
+  .game-board { grid-template-columns: repeat(5, 1fr); }
+  .cell { min-height: 45px; }
+  .dice {
+    width: 70px;
+    height: 70px;
+    font-size: 2.2em;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-bubbles" id="bg-bubbles"></div>
+
+<nav class="navbar">
+  <div class="logo"><span>🌸</span> <span>ФинГрамотность</span></div>
+  <div class="nav-links">
+    <button onclick="showPage('profile')" id="nav-profile">👤 Профиль</button>
+    <button onclick="showPage('learn')" id="nav-learn">📚 Обучение</button>
+    <button onclick="showPage('lobby')" id="nav-lobby">🎮 Игра</button>
+    <select class="lang-select" id="lang-select" onchange="changeLanguage(this.value)">
+      <option value="ru">🇷🇺 RU</option>
+      <option value="en">🇬 EN</option>
+    </select>
+    <button class="theme-btn" onclick="cycleTheme()" title="Сменить тему">🎨</button>
+  </div>
+</nav>
+
+<!-- ПРОФИЛЬ -->
+<div class="page active" id="page-profile">
+  <div class="profile-container">
+    <div class="profile-card">
+      <div class="profile-avatar-container" onclick="document.getElementById('avatar-upload').click()">
+        <div class="profile-avatar" id="profile-avatar">
+          <span id="avatar-emoji">👤</span>
+          <img id="avatar-img" style="display:none" alt="avatar">
+        </div>
+        <div class="avatar-upload-hint">📷</div>
+      </div>
+      <input type="file" id="avatar-upload" class="hidden-file-input" accept="image/*" onchange="handleAvatarUpload(event)">
+      
+      <h2 id="profile-greeting">Добро пожаловать! 🌷</h2>
+      <p style="color:var(--text-light); margin: 10px 0;">Введите имя, чтобы начать</p>
+      <input type="text" id="profile-name-input" placeholder="Ваше имя..." maxlength="20">
+      <br>
+      <button class="btn-primary" onclick="saveProfile()">✨ Сохранить</button>
+      
+      <div class="stats" id="profile-stats" style="display:none;">
+        <div class="stat-box">
+          <div class="number" id="stat-sections">0</div>
+          <div class="label">Разделов пройдено</div>
+        </div>
+        <div class="stat-box">
+          <div class="number" id="stat-games">0</div>
+          <div class="label">Игр сыграно</div>
+        </div>
+        <div class="stat-box">
+          <div class="number" id="stat-correct">0</div>
+          <div class="label">Правильных ответов</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="settings-card">
+      <h3>⚙️ Настройки</h3>
+      
+      <div class="setting-item">
+        <label class="setting-label">Тема оформления</label>
+        <div class="theme-grid">
+          <div class="theme-option theme-pink active" onclick="setTheme('default')">Розовая</div>
+          <div class="theme-option theme-dark" onclick="setTheme('dark')">Тёмная</div>
+          <div class="theme-option theme-blue" onclick="setTheme('blue')">Синяя</div>
+          <div class="theme-option theme-purple" onclick="setTheme('purple')">Фиолетовая</div>
+        </div>
+      </div>
+      
+      <div class="setting-item">
+        <label class="setting-label">Язык интерфейса</label>
+        <select class="lang-select" onchange="changeLanguage(this.value)" style="width:100%;">
+          <option value="ru">🇷🇺 Русский</option>
+          <option value="en">🇬 English</option>
+        </select>
+      </div>
+      
+      <div class="setting-item">
+        <label class="setting-label">Достижения</label>
+        <p style="color:var(--text-light); font-size:0.9em;">Пройдите все разделы обучения, чтобы разблокировать все достижения!</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ОБУЧЕНИЕ -->
+<div class="page" id="page-learn">
+  <div class="learn-header">
+    <h2>📚 Разделы обучения</h2>
+    <p>Изучайте разделы по порядку</p>
+  </div>
+  <div class="progress-container">
+    <div class="progress-bar"><div class="fill" id="learn-progress" style="width:0%"></div></div>
+    <div class="progress-text" id="progress-text">0 из 5 разделов</div>
+  </div>
+  <div class="sections-grid" id="sections-grid"></div>
+</div>
+
+<!-- ЛОББИ -->
+<div class="page" id="page-lobby">
+  <div class="lobby-container">
+    <div class="lobby-header">
+      <h2>🎲 Создание игры</h2>
+      <p>Настройте игроков — можно играть вдвоём на одном ПК!</p>
+    </div>
+
+    <h3 style="margin:20px 0 15px; color:var(--green-dark);">Игроки:</h3>
+    <div class="player-slots" id="player-slots"></div>
+
+    <div class="lobby-actions">
+      <button class="btn-secondary" onclick="addPlayerSlot()">➕ Добавить игрока</button>
+      <button class="btn-primary" onclick="startGameFromLobby()" id="start-lobby-btn" disabled>🚀 Начать игру</button>
+    </div>
+
+    <!-- ПРАВИЛА -->
+    <div class="rules-section">
+      <h3>📖 Правила игры</h3>
+      <p><strong> Цель:</strong> Первым добраться до финиша (клетка 50)!</p>
+      <p><strong>🎲 Как играть:</strong></p>
+      <ul>
+        <li>В свой ход ответьте на вопрос по финансовой грамотности</li>
+        <li>При правильном ответе — бросайте кубик и двигайтесь вперёд</li>
+        <li>При неправильном ответе — ход переходит следующему игроку</li>
+      </ul>
+      <p><strong>🎨 Клетки поля:</strong></p>
+      <ul>
+        <li>⬆️ <strong>Синяя (бонус)</strong> — бросьте кубик ещё раз</li>
+        <li>⬇️ <strong>Красная (штраф)</strong> — откат на 2 клетки назад</li>
+        <li>❓ <strong>Фиолетовая (вопрос)</strong> — дополнительный вопрос</li>
+      </ul>
+      <p><strong> Боты:</strong> Отвечают правильно в 65% случаев</p>
+      <p><strong>👥 На одном ПК:</strong> Выберите тип "Человек" — и игрок сам будет отвечать на вопросы!</p>
+      <p><strong>🏆 Победа:</strong> Первый, кто достигнет клетки 50, побеждает!</p>
+      <p><strong>📚 Вопросы:</strong> Берутся только из пройденных вами разделов обучения и не повторяются</p>
+    </div>
+  </div>
+</div>
+
+<!-- ИГРА -->
+<div class="page" id="page-game">
+  <div class="game-board-container" id="game-board-container">
+    <div class="game-info-bar">
+      <div style="font-weight:bold; color:var(--green-dark);">Ход: <span id="current-player-name">—</span></div>
+      <button class="btn-secondary" onclick="quitGame()">🚪 Выйти</button>
+    </div>
+    <div class="game-message" id="game-message"></div>
+    <div class="dice-area">
+      <div class="dice disabled" id="dice" onclick="rollDice()">🎲</div>
+      <div class="dice-label" id="dice-label">Сначала ответь на вопрос!</div>
+    </div>
+    <div class="game-board-wrapper">
+      <div class="game-board" id="game-board"></div>
+    </div>
+    <div class="players-panel" id="players-panel"></div>
+  </div>
+</div>
+
+<!-- МОДАЛКА -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+  <div class="modal-content" id="modal-content" onclick="event.stopPropagation()">
+    <button onclick="closeModal()" style="position:absolute; top:15px; right:20px; background:none; border:none; font-size:1.8em; cursor:pointer; color:var(--text);">✕</button>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<script>
+// ===== ПЕРЕВОДЫ =====
+const translations = {
+  ru: {
+    welcome: "Добро пожаловать! 🌷",
+    needTwoPlayers: "Нужно минимум 2 игрока!",
+    needSection: "Сначала пройди хотя бы один раздел обучения!",
+    gameStarted: "Игра началась!",
+    answerFirst: "Сначала ответь на вопрос!",
+    rollDice: "Нажми на кубик!",
+    rolling: "Бросок...",
+    rolled: "Выпало",
+    correct: "ответил правильно!",
+    wrong: "ошибся! Пропуск хода!",
+    bonus: "Бонус! Ещё бросок!",
+    penalty: "Штраф! -2 клетки",
+    rollAgain: "Бросай ещё раз!",
+    won: "победил!",
+    quitConfirm: "Выйти из игры?",
+    maxPlayers: "Максимум 6 игроков!",
+    questionFor: "Вопрос для",
+    continue: "Продолжить",
+    correctAnswer: "Правильно!",
+    wrongAnswer: "Неверно",
+    sectionCompleted: "Раздел пройден!",
+    takeQuiz: "Пройти тест",
+    quiz: "Тест",
+    from: "из",
+    bot: "Бот",
+    human: "Человек",
+    position: "Позиция",
+    turn: "Ход",
+    addPlayer: "Добавить игрока",
+    startGame: "Начать игру",
+    playerJoined: "Игрок добавлен!",
+    playerTypeHuman: "👤 Человек",
+    playerTypeBot: "🤖 Бот",
+    playerTypeLabel: "Тип:",
+    nameLabel: "Имя:"
+  },
+  en: {
+    welcome: "Welcome! 🌷",
+    needTwoPlayers: "Need at least 2 players!",
+    needSection: "Complete at least one learning section first!",
+    gameStarted: "Game started!",
+    answerFirst: "Answer the question first!",
+    rollDice: "Roll the dice!",
+    rolling: "Rolling...",
+    rolled: "Rolled",
+    correct: "answered correctly!",
+    wrong: "wrong! Skip turn!",
+    bonus: "Bonus! Roll again!",
+    penalty: "Penalty! -2 spaces",
+    rollAgain: "Roll again!",
+    won: "won!",
+    quitConfirm: "Quit game?",
+    maxPlayers: "Maximum 6 players!",
+    questionFor: "Question for",
+    continue: "Continue",
+    correctAnswer: "Correct!",
+    wrongAnswer: "Wrong",
+    sectionCompleted: "Section completed!",
+    takeQuiz: "Take Quiz",
+    quiz: "Quiz",
+    from: "of",
+    bot: "Bot",
+    human: "Human",
+    position: "Position",
+    turn: "Turn",
+    addPlayer: "Add Player",
+    startGame: "Start Game",
+    playerJoined: "Player added!",
+    playerTypeHuman: "👤 Human",
+    playerTypeBot: "🤖 Bot",
+    playerTypeLabel: "Type:",
+    nameLabel: "Name:"
+  }
+};
+
+let currentLang = 'ru';
+
+function t(key) {
+  return translations[currentLang][key] || key;
+}
+
+function changeLanguage(lang) {
+  currentLang = lang;
+  localStorage.setItem('finGramLang', lang);
+  document.getElementById('lang-select').value = lang;
+  updateProfileUI();
+  renderSections();
+  if (document.getElementById('page-lobby').classList.contains('active')) renderLobby();
+}
+
+// ===== ТЕМЫ =====
+const themes = ['default', 'dark', 'blue', 'purple'];
+let currentTheme = 0;
+
+function setTheme(themeName) {
+  document.body.setAttribute('data-theme', themeName === 'default' ? '' : themeName);
+  localStorage.setItem('finGramTheme', themeName);
+  document.querySelectorAll('.theme-option').forEach((el, i) => {
+    el.classList.toggle('active', themes[i] === themeName);
+  });
+}
+
+function cycleTheme() {
+  currentTheme = (currentTheme + 1) % themes.length;
+  setTheme(themes[currentTheme]);
+}
+
+// ===== ДАННЫЕ ОБУЧЕНИЯ =====
+const sections = [
+  {
+    id: 0, title: "Личный бюджет", icon: "💰", description: "Научись планировать доходы и расходы",
+    content: `
+      <h2>💰 Личный бюджет</h2>
+      <div class="info-block">
+        <h4>Что такое бюджет?</h4>
+        <p>Бюджет — это план твоих доходов и расходов на определённый период (неделю, месяц). Он помогает понять, куда уходят деньги и как накопить на важное. Без бюджета деньги «растворяются» незаметно — сегодня купил чипсы, завтра газировку, и к концу месяца пусто.</p>
+      </div>
+      <div class="info-block">
+        <h4>Правило 50/30/20</h4>
+        <p>Золотое правило распределения денег:</p>
+        <ul>
+          <li><strong>50%</strong> — необходимые расходы (еда, проезд, связь, школьные принадлежности)</li>
+          <li><strong>30%</strong> — желания (развлечения, хобби, кафе с друзьями, игры)</li>
+          <li><strong>20%</strong> — накопления и сбережения (на мечту, на чёрный день)</li>
+        </ul>
+        <p>Например, если у тебя 1000₽ в неделю: 500₽ на необходимое, 300₽ на развлечения, 200₽ в копилку.</p>
+      </div>
+      <div class="info-block">
+        <h4>Как вести бюджет?</h4>
+        <ul>
+          <li><strong>Записывай все доходы</strong> — карманные деньги, подарки, подработка, кэшбэк</li>
+          <li><strong>Фиксируй каждый расход</strong> — даже мелкий (жвачка за 30₽ тоже считается!)</li>
+          <li><strong>Ставь финансовые цели</strong> — накопить на телефон, игру, подарок маме</li>
+          <li><strong>Используй приложения</strong> — CoinKeeper, Дзен-мани, или обычную таблицу в Excel</li>
+          <li><strong>Анализируй раз в неделю</strong> — куда ушло больше всего? Можно ли сократить?</li>
+        </ul>
+      </div>
+      <div class="info-block">
+        <h4>Доходы и расходы подростка</h4>
+        <p><strong>Откуда могут быть деньги:</strong></p>
+        <ul>
+          <li>Карманные деньги от родителей</li>
+          <li>Подарки на день рождения и праздники</li>
+          <li>Подработка (репетиторство, выгул собак, помощь соседям)</li>
+          <li>Продажа ненужных вещей (Авито, Юла)</li>
+          <li>Кэшбэк и бонусы от банковских карт</li>
+        </ul>
+      </div>
+      <div class="info-block" style="background:linear-gradient(135deg, var(--pink), white); border-left-color: var(--green-light);">
+        <h4>💡 Лайфхак: Правило 24 часов</h4>
+        <p>Прежде чем что-то купить, подожди 24 часа. Если через день вещь всё ещё кажется нужной — покупай. Это поможет избежать импульсивных трат! Исследования показывают, что 70% импульсивных покупок забываются уже на следующий день.</p>
+      </div>
+      <div class="info-block" style="background:linear-gradient(135deg, var(--pink), white); border-left-color: var(--green-light);">
+        <h4>📊 Пример бюджета школьника</h4>
+        <p>Допустим, ты получаешь 2000₽ в месяц:</p>
+        <ul>
+          <li>🍔 Еда в школе и перекусы: 800₽</li>
+          <li>🚌 Проезд: 400₽</li>
+          <li>🎮 Развлечения: 400₽</li>
+          <li>📱 Связь/интернет: 200₽</li>
+          <li>💵 Накопления: 200₽</li>
+        </ul>
+        <p>За год накопится 2400₽ — можно купить хорошие наушники или игру!</p>
+      </div>
+    `,
+    quiz: [
+      { question: "Какое правило помогает правильно распределять бюджет?", options: ["30/30/40", "50/30/20", "60/20/20", "40/40/20"], correct: 1 },
+      { question: "Что нужно сделать перед импульсивной покупкой?", options: ["Сразу купить", "Подождать 24 часа", "Попросить скидку", "Купить две штуки"], correct: 1 },
+      { question: "Сколько процентов бюджета рекомендуется откладывать на накопления?", options: ["5%", "10%", "20%", "50%"], correct: 2 },
+      { question: "Что НЕ является доходом подростка?", options: ["Карманные деньги", "Подарки", "Штраф за опоздание", "Кэшбэк"], correct: 2 }
+    ]
+  },
+  {
+    id: 1, title: "Кибербезопасность", icon: "🔒", description: "Защити свои данные в интернете",
+    content: `
+      <h2>🔒 Кибербезопасность</h2>
+      <div class="info-block">
+        <h4>Почему это важно?</h4>
+        <p>В интернете мошенники могут украсть твои деньги, личные данные и даже взломать аккаунты родителей. По статистике, каждый третий подросток сталкивался с мошенничеством в сети. Знание правил кибербезопасности — твоя главная защита!</p>
+      </div>
+      <div class="info-block">
+        <h4>Правила безопасных паролей</h4>
+        <ul>
+          <li><strong>Минимум 8 символов</strong> — чем длиннее, тем лучше</li>
+          <li><strong>Используй буквы разного регистра, цифры и спецсимволы</strong> (!@#$%^&*)</li>
+          <li><strong>НЕ используй</strong> дату рождения, имя питомца, «123456», «qwerty»</li>
+          <li><strong>Разные пароли для разных сайтов</strong> — если взломают один, остальные будут в безопасности</li>
+          <li><strong>Включи двухфакторную аутентификацию (2FA)</strong> — вход по паролю + код из SMS или приложения</li>
+          <li><strong>Используй менеджер паролей</strong> — например, встроенный в браузер или Google Password Manager</li>
+        </ul>
+      </div>
+      <div class="info-block">
+        <h4>Фишинг — как распознать?</h4>
+        <p>Фишинг — это когда мошенники создают поддельные сайты или письма, чтобы украсть твои данные.</p>
+        <ul>
+          <li>Подозрительные ссылки в сообщениях от незнакомцев</li>
+          <li>Письма от «банка» с просьбой срочно ввести данные карты</li>
+          <li>Сайты с опечатками в адресе (sberbank-online.ru вместо sberbank.ru)</li>
+          <li>Обещания бесплатных подарков, iPhone, скидок 90% за ввод данных</li>
+          <li>Срочность: «Ваш аккаунт будет заблокирован через 1 час!»</li>
+        </ul>
+      </div>
+      <div class="info-block">
+        <h4>Безопасность в соцсетях</h4>
+        <ul>
+          <li>Не публикуй адрес дома, школу, номер телефона</li>
+          <li>Не принимай в друзья незнакомцев</li>
+          <li>Проверяй настройки приватности — кто видит твои посты?</li>
+          <li>Не отмечай геолокацию в реальном времени</li>
+          <li>Помни: всё, что попало в интернет, остаётся там навсегда</li>
+        </ul>
+      </div>
+      <div class="info-block">
+        <h4>Публичный Wi-Fi — опасность!</h4>
+        <p>В кафе, метро, аэропорту бесплатный Wi-Fi может быть ловушкой. Мошенники создают сети с похожими названиями и перехватывают все твои данные. <strong>Никогда не заходи в банк или не вводи пароли через публичный Wi-Fi!</strong></p>
+      </div>
+      <div class="info-block" style="background:linear-gradient(135deg, var(--pink), white); border-left-color: var(--green-light);">
+        <h4>💡 Совет</h4>
+        <p>Никогда не переходи по ссылкам от незнакомцев и не скачивай файлы из подозрительных источников. Если друг прислал странную ссылку — позвони ему и уточни! Его аккаунт могли взломать.</p>
+      </div>
+    `,
+    quiz: [
+      { question: "Какой пароль наиболее безопасный?", options: ["123456", "kotik2010", "Kt#9mP!x2", "qwerty"], correct: 2 },
+      { question: "Что такое фишинг?", options: ["Вид рыбалки", "Кража данных через поддельные сайты", "Антивирус", "Социальная сеть"], correct: 1 },
+      { question: "Что такое двухфакторная аутентификация?", options: ["Два пароля", "Вход по паролю + код из SMS/приложения", "Два аккаунта", "Двойной логин"], correct: 1 },
+      { question: "Что НЕЛЬЗЯ делать в публичном Wi-Fi?", options: ["Читать новости", "Вводить пароль от банка", "Смотреть видео", "Играть в игры"], correct: 1 }
+    ]
+  },
+  {
+    id: 2, title: "Защита от мошенников", icon: "🛡️", description: "Не дай себя обмануть",
+    content: `
+      <h2>️ Защита от мошенников</h2>
+      <div class="info-block">
+        <h4>Популярные схемы мошенничества</h4>
+        <ul>
+          <li><strong>«Ваша карта заблокирована»</strong> — звонят от имени банка и просят назвать CVV-код или перевести деньги на «безопасный счёт»</li>
+          <li><strong>«Вы выиграли приз!»</strong> — просят оплатить «доставку» или ввести данные карты для «получения выигрыша»</li>
+          <li><strong>Фейковые магазины</strong> — сайты с очень низкими ценами, которые исчезают после оплаты</li>
+          <li><strong>Мошенники в соцсетях</strong> — взламывают аккаунт друга и просят перевести деньги «срочно»</li>
+          <li><strong>«Инвестиции с гарантированным доходом»</strong> — обещают 100% прибыли за неделю. Это всегда обман!</li>
+          <li><strong>Скам на Авито</strong> — «покупатель» просит перейти по ссылке и ввести данные карты для «получения денег»</li>
+        </ul>
+      </div>
+      <div class="info-block">
+        <h4>Как защититься?</h4>
+        <ul>
+          <li>Банк <strong>НИКОГДА</strong> не спрашивает CVV-код и полный номер карты по телефону</li>
+          <li>Не переводи деньги незнакомцам — даже если история трогательная</li>
+          <li>Проверяй адрес сайта перед оплатой (должен быть https:// и нормальное название)</li>
+          <li>Если друг просит деньги в мессенджере — <strong>позвони ему</strong></li>
+          <li>Не переходи по подозрительным ссылкам</li>
+          <li>Читай отзывы о магазине перед покупкой</li>
+          <li>Если цена слишком низкая — это повод насторожиться</li>
+        </ul>
+      </div>
+      <div class="info-block">
+        <h4>Красные флаги мошенничества</h4>
+        <ul>
+          <li>Срочность: «Решайте прямо сейчас!»</li>
+          <li>Давление: «Иначе ваш аккаунт заблокируют!»</li>
+          <li>Слишком хорошие условия: «100% доход за день!»</li>
+          <li>Просят данные карты, паспорт, СНИЛС</li>
+          <li>Оплата только криптовалютой или на «безопасный счёт»</li>
+          <li>Нет юридического адреса и контактов компании</li>
+        </ul>
+      </div>
+      <div class="info-block">
+        <h4>Что делать, если обманули?</h4>
+        <ul>
+          <li><strong>Немедленно заблокируй карту</strong> через приложение банка или по телефону</li>
+          <li>Позвони в банк и сообщи о мошенничестве — иногда можно вернуть деньги</li>
+          <li>Расскажи родителям — они помогут разобраться</li>
+          <li>Напиши заявление в полицию</li>
+          <li>Пожалуйся на мошенника в поддержку платформы (Авито, ВКонтакте и т.д.)</li>
+          <li>Предупреди друзей, чтобы они не попались</li>
+        </ul>
+      </div>
+      <div class="info-block" style="background:linear-gradient(135deg, var(--pink), white); border-left-color: var(--green-light);">
+        <h4>🔑 Запомни!</h4>
+        <p>CVV-код (3 цифры на обороте карты) — это как пин-код. Никому его не говори! Настоящий банк никогда не попросит его по телефону. Если просят — это 100% мошенники.</p>
+      </div>
+    `,
+    quiz: [
+      { question: "Банк звонит и просит назвать CVV-код карты. Что делать?", options: ["Назвать код", "Положить трубку — это мошенники", "Назвать только 2 цифры", "Перезвонить в банк"], correct: 1 },
+      { question: "Друг написал в мессенджере и просит срочно перевести 5000₽. Твои действия?", options: ["Сразу перевести", "Позвонить другу и убедиться, что это он", "Игнорировать", "Перевести половину"], correct: 1 },
+      { question: "Где находится CVV-код на банковской карте?", options: ["На лицевой стороне", "На обороте, последние 3 цифры", "В приложении банка", "На чеке"], correct: 1 },
+      { question: "Что из этого — признак мошенничества?", options: ["Обычная цена товара", "«100% доход за день!»", "Нормальный адрес сайта", "Отзывы покупателей"], correct: 1 }
+    ]
+  },
+  {
+    id: 3, title: "Накопления и цели", icon: "🎯", description: "Копи на мечту правильно",
+    content: `
+      <h2> Накопления и финансовые цели</h2>
+      <div class="info-block">
+        <h4>Зачем копить?</h4>
+        <p>Накопления — это деньги, которые ты откладываешь на будущие цели. Это может быть новый телефон, игра, подарок другу или «подушка безопасности» на непредвиденные расходы. Люди, которые копят с детства, во взрослой жизни чувствуют себя увереннее.</p>
+      </div>
+      <div class="info-block">
+        <h4>SMART-цели</h4>
+        <p>Правильная финансовая цель должна быть:</p>
+        <ul>
+          <li><strong>S (Specific)</strong> — Конкретная: «Накопить 15 000₽ на беспроводные наушники»</li>
+          <li><strong>M (Measurable)</strong> — Измеримая: точная сумма, которую можно посчитать</li>
+          <li><strong>A (Achievable)</strong> — Достижимая: реальная для тебя сумма и срок</li>
+          <li><strong>R (Relevant)</strong> — Важная: тебе это действительно нужно, не навязано рекламой</li>
+          <li><strong>T (Time-bound)</strong> — Ограниченная по времени: «за 3 месяца»</li>
+        </ul>
+      </div>
+      <div class="info-block">
+        <h4>Методы накопления</h4>
+        <ul>
+          <li><strong>«Сначала заплати себе»</strong> — откладывай 10-20% от любых денег сразу, до трат</li>
+          <li><strong>Копилка-челлендж</strong> — откладывай каждый день на 1₽ больше (1₽, 2₽, 3₽... за год = 66 795₽!)</li>
+          <li><strong>Банка-цель</strong> — прозрачная банка с надписью цели, стоит на видном месте</li>
+          <li><strong>Накопительный счёт</strong> — банк начисляет процент на остаток (обычно 10-18% годовых)</li>
+          <li><strong>Метод конвертов</strong> — разложи деньги по конвертам с названиями целей</li>
+        </ul>
+      </div>
+      <div class="info-block">
+        <h4>Сложный процент — магия накоплений</h4>
+        <p>Если ты положишь 1000₽ под 12% годовых:</p>
+        <ul>
+          <li>Через 1 год: 1120₽</li>
+          <li>Через 5 лет: 1762₽</li>
+          <li>Через 10 лет: 3106₽</li>
+        </ul>
+        <p>Деньги делают деньги! Чем раньше начнёшь копить — тем больше получишь.</p>
+      </div>
+      <div class="info-block">
+        <h4>Чего НЕ надо делать</h4>
+        <ul>
+          <li>Не храни все накопления дома — могут украсть или потеряются</li>
+          <li>Не копи «на всё сразу» — раздели на конкретные цели</li>
+          <li>Не трогай накопления на мелочи — это священная сумма</li>
+          <li>Не сравнивай себя с другими — у каждого свой темп</li>
+        </ul>
+      </div>
+      <div class="info-block" style="background:linear-gradient(135deg, var(--pink), white); border-left-color: var(--green-light);">
+        <h4>💡 Совет</h4>
+        <p>Раздели большую цель на маленькие шаги. Если наушники стоят 15 000₽ и ты копишь 3 месяца — нужно откладывать 5 000₽ в месяц или ~170₽ в день. Это реально! Откладывай сразу, как получил деньги — не «потом», потому что «потом» не наступит.</p>
+      </div>
+    `,
+    quiz: [
+      { question: "Что означает буква S в SMART-целях?", options: ["Simple (простая)", "Specific (конкретная)", "Smart (умная)", "Strong (сильная)"], correct: 1 },
+      { question: "Метод «Сначала заплати себе» означает:", options: ["Купить себе подарок первым", "Откладывать 10-20% сразу при получении денег", "Платить только наличными", "Тратить всё сразу"], correct: 1 },
+      { question: "Сколько нужно откладывать в день, чтобы накопить 15 000₽ за 3 месяца?", options: ["50₽", "100₽", "~170₽", "500₽"], correct: 2 },
+      { question: "Что такое сложный процент?", options: ["Штраф банка", "Процент, который начисляется на сумму с уже начисленными процентами", "Комиссия за перевод", "Налог на доход"], correct: 1 }
+    ]
+  },
+  {
+    id: 4, title: "Банковские карты", icon: "💳", description: "Всё о дебетовых и кредитных картах",
+    content: `
+      <h2>💳 Банковские карты</h2>
+      <div class="info-block">
+        <h4>Виды карт</h4>
+        <ul>
+          <li><strong>Дебетовая карта</strong> — твои собственные деньги. Потратил только то, что есть на счёте. Самый безопасный вариант для начала.</li>
+          <li><strong>Кредитная карта</strong> — деньги банка. Можно потратить больше, чем есть, но нужно вернуть с процентами! Опасна для новичков.</li>
+          <li><strong>Виртуальная карта</strong> — только для онлайн-покупок, без физического пластика. Удобно для безопасности.</li>
+          <li><strong>Предоплаченная карта</strong> — карта с фиксированной суммой, как подарочная.</li>
+        </ul>
+      </div>
+      <div class="info-block">
+        <h4>Что нужно знать о карте?</h4>
+        <ul>
+          <li><strong>Номер карты</strong> — 16 цифр на лицевой стороне (можно сообщать для переводов)</li>
+          <li><strong>Срок действия</strong> — мм/гг (до какого месяца и года действует)</li>
+          <li><strong>CVV/CVC</strong> — 3 цифры на обороте (НИКОМУ не говорить!)</li>
+          <li><strong>ПИН-код</strong> — 4 цифры для банкомата (запомнить, не записывать!)</li>
+          <li><strong>Имя владельца</strong> — латиницей, как в паспорте</li>
+        </ul>
+      </div>
+      <div class="info-block">
+        <h4>Кэшбэк и бонусы</h4>
+        <p>Многие карты возвращают часть потраченных денег — это называется кэшбэк. Например, 1% кэшбэк означает, что с покупки за 1000₽ тебе вернут 10₽. Копи бонусы и используй их!</p>
+        <ul>
+          <li>Обычный кэшбэк: 1% на всё</li>
+          <li>Повышенный кэшбэк: 5-30% на выбранные категории</li>
+          <li>Бонусы «Спасибо» (Сбер), «Колесо» (Тинькофф) и др.</li>
+        </ul>
+      </div>
+      <div class="info-block">
+        <h4>Безопасность карты</h4>
+        <ul>
+          <li>Никогда не показывай CVV-код и не диктуй его по телефону</li>
+          <li>Не храни фото карты в телефоне</li>
+          <li>Включи уведомления о каждой операции</li>
+          <li>Установи лимит на интернет-покупки</li>
+          <li>При потере карты — немедленно заблокируй в приложении</li>
+          <li>Используй виртуальную карту для подозрительных сайтов</li>
+        </ul>
+      </div>
+      <div class="info-block">
+        <h4>С какого возраста можно иметь карту?</h4>
+        <ul>
+          <li><strong>До 14 лет</strong> — дополнительную карту к счёту родителя (например, СберKids, Тинькофф Junior)</li>
+          <li><strong>С 14 лет</strong> — можно открыть счёт и получить карту самостоятельно по паспорту</li>
+          <li><strong>С 18 лет</strong> — все виды карт, включая кредитные</li>
+        </ul>
+      </div>
+      <div class="info-block" style="background:linear-gradient(135deg, var(--pink), white); border-left-color: var(--green-light);">
+        <h4>💡 Совет</h4>
+        <p>Начни с дебетовой карты с кэшбэком — это безопасно и выгодно. Кредитную карту оформляй только когда будешь полностью понимать, как работают проценты. Помни: кредитка — это не «дополнительные деньги», это ДОЛГ, который нужно вернуть.</p>
+      </div>
+    `,
+    quiz: [
+      { question: "Чем дебетовая карта отличается от кредитной?", options: ["Ничем", "Дебетовая — свои деньги, кредитная — деньги банка", "Кредитная бесплатная", "Дебетовая только для интернета"], correct: 1 },
+      { question: "Что такое кэшбэк?", options: ["Штраф за покупку", "Возврат части потраченных денег", "Комиссия банка", "Процент по вкладу"], correct: 1 },
+      { question: "Сколько цифр в ПИН-коде карты?", options: ["3", "4", "6", "8"], correct: 1 },
+      { question: "С какого возраста можно самостоятельно открыть счёт в банке?", options: ["С 10 лет", "С 14 лет", "С 16 лет", "С 18 лет"], correct: 1 }
+    ]
+  }
+];
+
+// ===== СОСТОЯНИЕ =====
+let appState = { profile: { name: '', avatar: null }, completedSections: [], stats: { gamesPlayed: 0, correctAnswers: 0 } };
+let gameState = { players: [], currentPlayerIndex: 0, boardSize: 50, isRolling: false, gameOver: false, canRollDice: false };
+let usedQuestions = new Set();
+const PLAYER_COLORS = ['#e57373', '#64b5f6', '#81c784', '#ffb74d', '#ba68c8', '#4dd0e1'];
+
+// ===== ФУНКЦИИ СОХРАНЕНИЯ ИГРЫ =====
+function saveGameState() {
+  // Преобразуем Set в массив для сохранения в JSON
+  const stateToSave = {
+    ...gameState,
+    usedQuestions: Array.from(usedQuestions)
+  };
+  try {
+    localStorage.setItem('finGramGameSession', JSON.stringify(stateToSave));
+  } catch(e) {
+    console.warn('Не удалось сохранить состояние игры');
+  }
+}
+
+function loadGameState() {
+  const saved = localStorage.getItem('finGramGameSession');
+  if (saved) {
+    try {
+      const loadedState = JSON.parse(saved);
+      // Восстанавливаем Set из массива
+      usedQuestions = new Set(loadedState.usedQuestions || []);
+      delete loadedState.usedQuestions;
+      
+      Object.assign(gameState, loadedState);
+      return true;
+    } catch(e) {
+      console.error('Ошибка загрузки состояния игры:', e);
+      return false;
+    }
+  }
+  return false;
+}
+
+function clearGameSession() {
+  localStorage.removeItem('finGramGameSession');
+  usedQuestions.clear();
+}
+
+// ===== ИНИЦИАЛИЗАЦИЯ =====
+function createBubbles() {
+  const c = document.getElementById('bg-bubbles');
+  for (let i = 0; i < 15; i++) {
+    const b = document.createElement('div'); b.className = 'bubble';
+    const s = Math.random() * 100 + 50;
+    b.style.cssText = `width:${s}px;height:${s}px;left:${Math.random()*100}%;top:${Math.random()*100}%;animation-delay:${Math.random()*20}s`;
+    c.appendChild(b);
+  }
+}
+createBubbles();
+
+function loadState() {
+  const saved = localStorage.getItem('finGramotnostState');
+  if (saved) { try { appState = JSON.parse(saved); } catch(e) {} }
+  
+  const savedTheme = localStorage.getItem('finGramTheme');
+  if (savedTheme) {
+    currentTheme = themes.indexOf(savedTheme);
+    setTheme(savedTheme);
+  }
+  
+  const savedLang = localStorage.getItem('finGramLang');
+  if (savedLang) {
+    currentLang = savedLang;
+    document.getElementById('lang-select').value = savedLang;
+  }
+  
+  updateProfileUI(); renderSections();
+  
+  // Проверяем, есть ли активная сессия игры
+  if (loadGameState()) {
+    // Есть сохранённая игра - восстанавливаем её
+    showPage('game');
+    document.getElementById('game-board-container').classList.add('active');
+    buildBoard(); 
+    updateGameUI(); 
+    showMessage('Игра восстановлена!', 'success');
+    
+    // Если игра не закончена и не идёт анимация, продолжаем ход
+    if (!gameState.gameOver && !gameState.isRolling && !gameState.canRollDice) {
+      setTimeout(() => askTurnQuestion(), 1000);
+    } else if (gameState.canRollDice && gameState.players[gameState.currentPlayerIndex]?.type === 'bot') {
+      // Если был ход бота и он ждал броска
+      setTimeout(() => rollDice(), 1000);
+    }
+  } else {
+    // Нет сохранённой игры - показываем лобби
+    initLobby();
+  }
+}
+
+function saveState() { try { localStorage.setItem('finGramotnostState', JSON.stringify(appState)); } catch(e) {} }
+
+function showPage(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-links button').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+  document.getElementById('nav-' + page).classList.add('active');
+  if (page === 'learn') renderSections();
+  if (page === 'profile') updateProfileUI();
+  if (page === 'lobby') renderLobby();
+}
+
+// ===== ПРОФИЛЬ =====
+function handleAvatarUpload(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) { 
+    const img = new Image();
+    img.onload = function() {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      const maxSize = 500;
+      let width = img.width;
+      let height = img.height;
+      
+      if (width > height) {
+        if (width > maxSize) { height *= maxSize / width; width = maxSize; }
+      } else {
+        if (height > maxSize) { width *= maxSize / height; height = maxSize; }
+      }
+      
+      canvas.width = width;
+      canvas.height = height;
+      ctx.drawImage(img, 0, 0, width, height);
+      
+      appState.profile.avatar = canvas.toDataURL('image/jpeg', 0.8);
+      updateProfileUI(); 
+      saveState();
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function saveProfile() {
+  const name = document.getElementById('profile-name-input').value.trim();
+  if (!name) { alert('Введите имя!'); return; }
+  appState.profile.name = name; saveState(); updateProfileUI();
+  // Обновить имя первого игрока в лобби
+  if (gameState.players.length > 0 && gameState.players[0].type === 'human') {
+    gameState.players[0].name = name;
+    gameState.players[0].avatar = appState.profile.avatar;
+    saveGameState();
+  }
+}
+
+function updateProfileUI() {
+  const name = appState.profile.name;
+  const avatarImg = document.getElementById('avatar-img');
+  const avatarEmoji = document.getElementById('avatar-emoji');
+  if (appState.profile.avatar) { avatarImg.src = appState.profile.avatar; avatarImg.style.display = 'block'; avatarEmoji.style.display = 'none'; }
+  else { avatarImg.style.display = 'none'; avatarEmoji.style.display = 'block'; }
+  if (name) {
+    document.getElementById('profile-greeting').textContent = `Привет, ${name}! 🌷`;
+    document.getElementById('profile-name-input').value = name;
+    document.getElementById('profile-stats').style.display = 'grid';
+    document.getElementById('stat-sections').textContent = appState.completedSections.length;
+    document.getElementById('stat-games').textContent = appState.stats.gamesPlayed;
+    document.getElementById('stat-correct').textContent = appState.stats.correctAnswers;
+  }
+}
+
+// ===== ОБУЧЕНИЕ =====
+function renderSections() {
+  const grid = document.getElementById('sections-grid'); grid.innerHTML = '';
+  const completed = appState.completedSections;
+  document.getElementById('learn-progress').style.width = (completed.length / sections.length * 100) + '%';
+  document.getElementById('progress-text').textContent = `${completed.length} ${currentLang === 'ru' ? 'из' : 'of'} ${sections.length}`;
+  sections.forEach((section, index) => {
+    const isCompleted = completed.includes(index);
+    const isUnlocked = index === 0 || completed.includes(index - 1);
+    const card = document.createElement('div');
+    card.className = 'section-card' + (isCompleted ? ' completed' : '') + (!isUnlocked ? ' locked' : '');
+    card.innerHTML = `${isCompleted ? '<div class="badge">✅</div>' : ''}${!isUnlocked ? '<div class="lock-icon">🔒</div>' : ''}<span class="icon">${section.icon}</span><h3>${section.title}</h3><p>${section.description}</p>`;
+    if (isUnlocked) card.onclick = () => openSection(index);
+    grid.appendChild(card);
+  });
+}
+
+function openSection(index) {
+  const section = sections[index];
+  document.getElementById('modal-body').innerHTML = `<h2>${section.icon} ${section.title}</h2>${section.content}<button class="btn-primary" onclick="startQuiz(${index})" style="margin-top:20px;"> 📝 ${t('takeQuiz')}</button>`;
+  document.getElementById('modal-overlay').classList.add('active');
+}
+
+function startQuiz(sectionIndex) {
+  const q = sections[sectionIndex].quiz[0];
+  document.getElementById('modal-body').innerHTML = `<h2> 📝 ${t('quiz')}: ${sections[sectionIndex].title}</h2><div style="margin:20px 0;"><p style="font-size:1.1em; margin-bottom:15px;"><strong>${q.question}</strong></p><div style="display:flex; flex-direction:column; gap:10px;">${q.options.map((opt, i) => `<button class="btn-secondary" onclick="answerQuiz(${i}, ${q.correct}, ${sectionIndex})" style="text-align:left;">${opt}</button>`).join('')}</div></div>`;
+}
+
+function answerQuiz(selected, correct, sectionIndex) {
+  const passed = selected === correct;
+  if (passed && !appState.completedSections.includes(sectionIndex)) appState.completedSections.push(sectionIndex);
+  appState.stats.correctAnswers++; saveState(); renderSections();
+  document.getElementById('modal-body').innerHTML = `<div style="text-align:center; padding:30px;"><div style="font-size:4em; margin-bottom:15px;">${passed ? '🎉' : '😔'}</div><h2>${passed ? t('correctAnswer') : t('wrongAnswer')}</h2>${passed ? `<p style="color:var(--green); margin-top:10px;">${t('sectionCompleted')}</p>` : ''}<button class="btn-primary" onclick="closeModal()" style="margin-top:20px;">${t('continue')}</button></div>`;
+}
+
+function closeModal() { document.getElementById('modal-overlay').classList.remove('active'); }
+
+// ===== ЛОББИ =====
+function initLobby() {
+  // Очищаем сессию игры при входе в лобби
+  clearGameSession();
+  
+  gameState.players = [{ 
+    name: appState.profile.name || 'Игрок 1', 
+    avatar: appState.profile.avatar, 
+    type: 'human'
+  }];
+  renderLobby();
+}
+
+function renderLobby() {
+  const container = document.getElementById('player-slots');
+  container.innerHTML = '';
+  
+  gameState.players.forEach((player, index) => {
+    const slot = document.createElement('div');
+    slot.className = 'player-slot filled';
+    
+    const infoDiv = document.createElement('div');
+    infoDiv.className = 'slot-info';
+    
+    // Поле имени
+    const nameLabel = document.createElement('div');
+    nameLabel.style.cssText = 'font-size:0.75em; color:var(--text-light); font-weight:600;';
+    nameLabel.textContent = t('nameLabel');
+    
+    const nameInput = document.createElement('input');
+    nameInput.type = 'text';
+    nameInput.className = 'slot-name-input';
+    nameInput.value = player.name;
+    nameInput.maxLength = 15;
+    nameInput.onchange = function() { 
+      gameState.players[index].name = this.value || `Игрок ${index + 1}`; 
+      saveGameState();
+    };
+    if (index === 0) {
+      nameInput.disabled = true;
+      nameInput.style.opacity = '0.7';
+      nameInput.title = 'Имя берётся из профиля';
+    }
+    
+    // Селектор типа
+    const typeLabel = document.createElement('div');
+    typeLabel.style.cssText = 'font-size:0.75em; color:var(--text-light); font-weight:600;';
+    typeLabel.textContent = t('playerTypeLabel');
+    
+    const typeSelect = document.createElement('select');
+    typeSelect.className = 'slot-type-select';
+    typeSelect.innerHTML = `
+      <option value="human" ${player.type === 'human' ? 'selected' : ''}>👤 ${t('human')}</option>
+      <option value="bot" ${player.type === 'bot' ? 'selected' : ''}>🤖 ${t('bot')}</option>
+    `;
+    typeSelect.onchange = function() { 
+      gameState.players[index].type = this.value; 
+      saveGameState();
+      renderLobby();
+    };
+    if (index === 0) {
+      typeSelect.disabled = true;
+      typeSelect.style.opacity = '0.7';
+      typeSelect.title = 'Первый игрок всегда человек';
+    }
+    
+    infoDiv.appendChild(nameLabel);
+    infoDiv.appendChild(nameInput);
+    infoDiv.appendChild(typeLabel);
+    infoDiv.appendChild(typeSelect);
+    
+    slot.innerHTML = `<div class="slot-avatar">${player.avatar && index === 0 ? `<img src="${player.avatar}" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">` : (player.type === 'bot' ? '🤖' : player.name[0].toUpperCase())}</div>`;
+    slot.appendChild(infoDiv);
+    
+    // Кнопка удаления (нельзя удалить первого игрока)
+    if (index > 0) {
+      const removeBtn = document.createElement('button');
+      removeBtn.className = 'slot-btn remove';
+      removeBtn.textContent = '✕';
+      removeBtn.style.cssText = 'background:#ffcdd2; border:none; border-radius:50%; width:28px; height:28px; cursor:pointer; font-weight:bold; color:#c62828; flex-shrink:0;';
+      removeBtn.onclick = () => removePlayerSlot(index);
+      slot.appendChild(removeBtn);
+    }
+    
+    container.appendChild(slot);
+  });
+  
+  // Кнопка добавить игрока
+  if (gameState.players.length < 6) {
+    const addSlot = document.createElement('div');
+    addSlot.className = 'player-slot empty';
+    addSlot.textContent = '➕ ' + t('addPlayer');
+    addSlot.onclick = addPlayerSlot;
+    container.appendChild(addSlot);
+  }
+  
+  const startBtn = document.getElementById('start-lobby-btn');
+  startBtn.disabled = gameState.players.length < 2;
+}
+
+function addPlayerSlot() {
+  if (gameState.players.length >= 6) { alert(t('maxPlayers')); return; }
+  const playerCount = gameState.players.filter(p => p.type === 'human').length + 1;
+  gameState.players.push({ 
+    name: `${t('human')} ${playerCount}`, 
+    avatar: null, 
+    type: 'human'  // По умолчанию человек
+  });
+  saveGameState();
+  renderLobby();
+  showMessage(t('playerJoined'), 'success');
+}
+
+function removePlayerSlot(index) {
+  gameState.players.splice(index, 1);
+  saveGameState();
+  renderLobby();
+}
+
+function startGameFromLobby() {
+  if (gameState.players.length < 2) {
+    alert(t('needTwoPlayers'));
+    return;
+  }
+  if (appState.completedSections.length === 0) {
+    alert(t('needSection'));
+    showPage('learn');
+    return;
+  }
+  
+  // Присвоить цвета и позиции
+  gameState.players.forEach((p, i) => {
+    p.position = 0;
+    p.color = PLAYER_COLORS[i % PLAYER_COLORS.length];
+  });
+  
+  gameState.currentPlayerIndex = 0;
+  gameState.isRolling = false;
+  gameState.gameOver = false;
+  gameState.canRollDice = false;
+  
+  usedQuestions.clear();
+  saveGameState(); // Сохраняем начальное состояние игры
+  
+  document.getElementById('page-lobby').classList.remove('active');
+  document.getElementById('page-game').classList.add('active');
+  document.getElementById('game-board-container').classList.add('active');
+  
+  buildBoard(); updateGameUI(); showMessage(t('gameStarted'), 'success');
+  setTimeout(() => askTurnQuestion(), 1000);
+}
+
+// ===== ИГРА =====
+function buildBoard() {
+  const board = document.getElementById('game-board'); board.innerHTML = '';
+  for (let i = 0; i < gameState.boardSize; i++) {
+    const cell = document.createElement('div'); cell.className = 'cell'; cell.id = 'cell-' + i;
+    let cellType = '', cellIcon = '';
+    if (i === 0) { cellType = 'start'; cellIcon = '🏁'; }
+    else if (i === gameState.boardSize - 1) { cellType = 'finish'; cellIcon = ''; }
+    else if (i % 7 === 0) { cellType = 'question'; cellIcon = '❓'; }
+    else if (i % 5 === 0) { cellType = 'bonus'; cellIcon = '⬆️'; }
+    else if (i % 9 === 0) { cellType = 'penalty'; cellIcon = '⬇️'; }
+    else { cellIcon = (i + 1).toString(); }
+    if (cellType) cell.classList.add(cellType);
+    cell.innerHTML = `<span class="cell-number">${i+1}</span><span class="cell-icon">${cellIcon}</span>`;
+    board.appendChild(cell);
+  }
+  renderPlayerTokens();
+}
+
+function renderPlayerTokens() {
+  document.querySelectorAll('.player-token').forEach(t => t.remove());
+  gameState.players.forEach((player, pi) => {
+    const cell = document.getElementById('cell-' + player.position);
+    if (cell) {
+      const token = document.createElement('div'); token.className = 'player-token'; token.style.background = player.color;
+      if (player.avatar && player.type === 'human') token.innerHTML = `<img src="${player.avatar}">`;
+      else token.textContent = player.name[0].toUpperCase();
+      token.style.left = `calc(50% + ${(pi - gameState.players.length/2 + 0.5) * 30}px)`;
+      token.style.bottom = '5px';
+      cell.appendChild(token);
+    }
+  });
+}
+
+function updateGameUI() {
+  const player = gameState.players[gameState.currentPlayerIndex];
+  document.getElementById('current-player-name').textContent = player.name;
+  const panel = document.getElementById('players-panel');
+  panel.innerHTML = gameState.players.map((p, i) => `
+    <div class="player-card-game ${i === gameState.currentPlayerIndex ? 'active-turn' : ''}">
+      <div class="p-name">
+        ${p.avatar && p.type === 'human' ? `<div class="p-avatar"><img src="${p.avatar}"></div>` : `<div class="p-avatar" style="background:${p.color}; display:flex; align-items:center; justify-content:center; color:white; font-weight:bold;">${p.type === 'bot' ? '' : p.name[0].toUpperCase()}</div>`}
+        ${p.name} ${p.type === 'bot' ? `(${t('bot')})` : ''}
+      </div>
+      <div class="p-position">${t('position')}: ${p.position + 1}</div>
+    </div>
+  `).join('');
+  renderPlayerTokens();
+}
+
+function getUnusedQuestion() {
+  const availableSections = appState.completedSections;
+  const allQuestions = [];
+  
+  availableSections.forEach(sectionIndex => {
+    sections[sectionIndex].quiz.forEach((q, qIndex) => {
+      const questionId = `${sectionIndex}-${qIndex}`;
+      if (!usedQuestions.has(questionId)) {
+        allQuestions.push({ question: q, sectionIndex, questionId });
+      }
+    });
+  });
+  
+  if (allQuestions.length === 0) {
+    usedQuestions.clear();
+    availableSections.forEach(sectionIndex => {
+      sections[sectionIndex].quiz.forEach((q, qIndex) => {
+        const questionId = `${sectionIndex}-${qIndex}`;
+        allQuestions.push({ question: q, sectionIndex, questionId });
+      });
+    });
+  }
+  
+  return allQuestions[Math.floor(Math.random() * allQuestions.length)];
+}
+
+function askTurnQuestion() {
+  if (gameState.gameOver) return;
+  const player = gameState.players[gameState.currentPlayerIndex];
+  
+  const { question: q, sectionIndex, questionId } = getUnusedQuestion();
+  const section = sections[sectionIndex];
+  
+  document.getElementById('modal-body').innerHTML = `
+    <h2> ${t('questionFor')} ${player.name}</h2>
+    <p style="color:var(--text-light); margin:10px 0;">${section.title}</p>
+    <div style="margin:20px 0;">
+      <p style="font-size:1.1em; margin-bottom:15px;"><strong>${q.question}</strong></p>
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        ${q.options.map((opt, i) => `<button class="btn-secondary" onclick="answerTurnQuestion(${i}, ${q.correct}, '${questionId}')" style="text-align:left;">${opt}</button>`).join('')}
+      </div>
+    </div>`;
+  document.getElementById('modal-overlay').classList.add('active');
+  
+  // Если бот — отвечает автоматически
+  if (player.type === 'bot') {
+    setTimeout(() => {
+      const botCorrect = Math.random() < 0.65;
+      const correctIndex = q.correct;
+      const buttons = document.querySelectorAll('#modal-body .btn-secondary');
+      if (buttons[correctIndex]) {
+        buttons[correctIndex].style.background = 'var(--green-light)';
+        buttons[correctIndex].style.borderColor = 'var(--green)';
+      }
+      if (!botCorrect) {
+        const wrongOptions = q.options.map((_, i) => i).filter(i => i !== correctIndex);
+        const wrongIdx = wrongOptions[Math.floor(Math.random() * wrongOptions.length)];
+        if (buttons[wrongIdx]) {
+          buttons[wrongIdx].style.background = '#ffcdd2';
+          buttons[wrongIdx].style.borderColor = '#e57373';
+        }
+      }
+      setTimeout(() => {
+        closeModal();
+        processTurnAnswer(botCorrect, player, questionId);
+      }, 1500);
+    }, 1500);
+  }
+  // Если человек — ждём ответа игрока (ничего не делаем, ждём клика)
+}
+
+function answerTurnQuestion(selected, correct, questionId) {
+  const buttons = document.querySelectorAll('#modal-body .btn-secondary');
+  buttons.forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === correct) {
+      btn.style.background = 'var(--green-light)';
+      btn.style.borderColor = 'var(--green)';
+    } else if (i === selected) {
+      btn.style.background = '#ffcdd2';
+      btn.style.borderColor = '#e57373';
+    }
+  });
+  
+  setTimeout(() => {
+    closeModal();
+    processTurnAnswer(selected === correct, gameState.players[gameState.currentPlayerIndex], questionId);
+  }, 1200);
+}
+
+function processTurnAnswer(isCorrect, player, questionId) {
+  if (questionId) usedQuestions.add(questionId);
+  saveGameState(); // Сохраняем использованные вопросы
+  
+  if (isCorrect) {
+    showMessage(`${player.name} ${t('correct')}`, 'success');
+    gameState.canRollDice = true;
+    saveGameState(); // Сохраняем состояние
+    document.getElementById('dice').classList.remove('disabled');
+    document.getElementById('dice-label').textContent = t('rollDice');
+    if (player.type === 'bot') setTimeout(() => rollDice(), 1000);
+  } else {
+    showMessage(`${player.name} ${t('wrong')}`, 'error');
+    setTimeout(() => nextTurn(), 2000);
+  }
+}
+
+function rollDice() {
+  if (!gameState.canRollDice || gameState.isRolling) return;
+  
+  gameState.isRolling = true;
+  gameState.canRollDice = false;
+  saveGameState(); // Сохраняем состояние
+  
+  const dice = document.getElementById('dice');
+  const diceLabel = document.getElementById('dice-label');
+  
+  dice.classList.add('rolling', 'disabled');
+  diceLabel.textContent = t('rolling');
+  
+  let rollCount = 0;
+  const rollInterval = setInterval(() => {
+    dice.textContent = Math.floor(Math.random() * 6) + 1;
+    rollCount++;
+  }, 80);
+  
+  setTimeout(() => {
+    clearInterval(rollInterval);
+    const result = Math.floor(Math.random() * 6) + 1;
+    dice.textContent = result;
+    dice.classList.remove('rolling');
+    diceLabel.textContent = `${t('rolled')}: ${result}`;
+    
+    setTimeout(() => processMove(result), 1000);
+  }, 800);
+}
+
+function processMove(diceValue) {
+  const player = gameState.players[gameState.currentPlayerIndex];
+  const newPos = player.position + diceValue;
+  if (newPos >= gameState.boardSize - 1) {
+    player.position = gameState.boardSize - 1; gameState.gameOver = true;
+    renderPlayerTokens(); updateGameUI();
+    showMessage(` ${player.name} ${t('won')}`, 'success');
+    appState.stats.gamesPlayed++; saveState();
+    clearGameSession(); // Очищаем сессию после победы
+    setTimeout(() => { alert(`${player.name} ${t('won')}`); quitGame(); }, 2000);
+    return;
+  }
+  player.position = newPos; renderPlayerTokens(); updateGameUI();
+  saveGameState(); // Сохраняем позиции
+  
+  const cellType = getCellType(newPos);
+  setTimeout(() => {
+    if (cellType === 'bonus') {
+      showMessage(t('bonus'), 'success');
+      gameState.canRollDice = true; document.getElementById('dice').classList.remove('disabled');
+      document.getElementById('dice-label').textContent = t('rollAgain');
+      saveGameState();
+      if (player.type === 'bot') setTimeout(() => rollDice(), 1000);
+    } else if (cellType === 'penalty') {
+      player.position = Math.max(0, player.position - 2);
+      showMessage(t('penalty'), 'error'); renderPlayerTokens();
+      saveGameState();
+      setTimeout(() => nextTurn(), 1500);
+    } else { setTimeout(() => nextTurn(), 1000); }
+  }, 500);
+}
+
+function getCellType(pos) {
+  if (pos === 0) return 'start';
+  if (pos === gameState.boardSize - 1) return 'finish';
+  if (pos % 7 === 0) return 'question';
+  if (pos % 5 === 0) return 'bonus';
+  if (pos % 9 === 0) return 'penalty';
+  return 'normal';
+}
+
+function nextTurn() {
+  gameState.currentPlayerIndex = (gameState.currentPlayerIndex + 1) % gameState.players.length;
+  gameState.isRolling = false; gameState.canRollDice = false;
+  saveGameState(); // Сохраняем смену хода
+  document.getElementById('dice').classList.add('disabled');
+  document.getElementById('dice-label').textContent = t('answerFirst');
+  updateGameUI();
+  setTimeout(() => askTurnQuestion(), 1000);
+}
+
+function quitGame() {
+  if (confirm(t('quitConfirm'))) {
+    clearGameSession(); // Очищаем сессию при выходе
+    showPage('lobby');
+    document.getElementById('game-board-container').classList.remove('active');
+  }
+}
+
+function showMessage(text, type) {
+  const msg = document.getElementById('game-message');
+  msg.textContent = text; msg.className = 'game-message show ' + type;
+  setTimeout(() => msg.classList.remove('show'), 3000);
+}
+
+loadState();
+</script>
+</body>
+</html>
